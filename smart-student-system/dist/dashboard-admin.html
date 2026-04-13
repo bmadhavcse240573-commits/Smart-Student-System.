@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Innosphere</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #5b21b6 0%, #9333ea 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .navbar .user-info span {
+            font-weight: 500;
+        }
+
+        .navbar .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .navbar .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dashboard-header h2 {
+            color: #1e293b;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .institution-strip {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #9333ea;
+        }
+
+        .institution-strip h3 {
+            color: #1e293b;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .notice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .notice-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.9rem;
+            background: #fafafa;
+        }
+
+        .notice-card h4 {
+            font-size: 0.98rem;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .notice-card ul {
+            list-style: none;
+            display: grid;
+            gap: 0.45rem;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .notice-card li {
+            border-left: 3px solid #a855f7;
+            padding-left: 0.5rem;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .resource-link {
+            text-decoration: none;
+            color: #4c1d95;
+            background: #f3e8ff;
+            border: 1px solid #ddd6fe;
+            border-radius: 999px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .resource-link:hover {
+            background: #ede9fe;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .stat-card.students .icon {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .stat-card.faculty .icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .stat-card.admins .icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .management-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h3 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #5b21b6, #9333ea);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .users-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .users-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #2563eb;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #5b21b6;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .cancel-btn {
+            flex: 1;
+            background: #f3f4f6;
+            color: #374151;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .save-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #5b21b6, #9333ea);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 0.25rem;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #5b21b6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 0 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .users-table {
+                font-size: 0.9rem;
+            }
+
+            .users-table th,
+            .users-table td {
+                padding: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .notice-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1><i class="fas fa-crown"></i> Innosphere Admin</h1>
+            <div class="user-info">
+                <span id="adminName">Loading...</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div id="notificationsSection" style="margin-bottom: 24px;"></div>
+        <div class="dashboard-header">
+            <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+            <p>Manage students, faculty, and system administration</p>
+        </div>
+
+        <div class="institution-strip">
+            <h3><i class="fas fa-bullhorn"></i> Institutional Highlights</h3>
+            <p style="color:#64748b;">Centralized exam notices, circulars, and compliance links inspired by the main institutional portal.</p>
+            <div class="notice-grid">
+                <div class="notice-card">
+                    <h4>Examination Notices</h4>
+                    <ul>
+                        <li>II & III year supplementary schedule published.</li>
+                        <li>Results declaration circular shared for Jan 2026 exams.</li>
+                        <li>Semester fee payment deadline extended this week.</li>
+                    </ul>
+                </div>
+                <div class="notice-card">
+                    <h4>College Notifications</h4>
+                    <ul>
+                        <li>Admissions open for Academic Year 2026-27.</li>
+                        <li>Innovation Cell student project applications invited.</li>
+                        <li>Placement readiness workshop registrations enabled.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="resource-links">
+                <a href="index.html#announcement-board" class="resource-link">Announcements</a>
+                <a href="index.html#recruiters" class="resource-link">Recruiters</a>
+                <a href="index.html#contact" class="resource-link">Contact</a>
+                <a href="index.html#features" class="resource-link">Academics</a>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card students">
+                <div class="icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="number" id="studentsCount">0</div>
+                <div class="label">Total Students</div>
+            </div>
+            <div class="stat-card faculty">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="number" id="facultyCount">0</div>
+                <div class="label">Total Faculty</div>
+            </div>
+            <div class="stat-card admins">
+                <div class="icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="number" id="adminsCount">0</div>
+                <div class="label">Total Admins</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('students')">Students</button>
+            <button class="tab" onclick="switchTab('faculty')">Faculty</button>
+            <button class="tab" onclick="switchTab('admins')">Admins</button>
+        </div>
+
+        <div id="studentsTab" class="tab-content active">
+            <div class="management-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-graduate"></i> Student Management</h3>
+                    <button class="add-btn" onclick="openAddModal('student')">
+                        <i class="fas fa-plus"></i> Add Student
+                    </button>
+                </div>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Student ID</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Students will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="management-section" style="margin-top: 24px;">
+                <div class="section-header">
+                    <h3><i class="fas fa-bullhorn"></i> Announce Results</h3>
+                </div>
+                <form id="announceResultsForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:end;">
+                    <div class="form-group" style="margin:0;">
+                        <label for="announceBranch">Branch</label>
+                        <input type="text" id="announceBranch" placeholder="All or CSE/ECE/...">
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <label for="announceYear">Year</label>
+                        <select id="announceYear">
+                            <option value="all">All Years</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0;grid-column:1/-1;">
+                        <label for="announceMessage">Announcement Message</label>
+                        <input type="text" id="announceMessage" required placeholder="Semester 4 results are published. Check your Results tab.">
+                    </div>
+                    <div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <button type="submit" class="add-btn" style="margin:0;"><i class="fas fa-paper-plane"></i> Send Announcement</button>
+                        <span id="announceResultsStatus" style="font-weight:600;color:#6b7280;"></span>
+                    </div>
+                </form>
+
+                <div style="margin-top:18px;">
+                    <h4 style="margin:0 0 10px 0;color:#1f2937;"><i class="fas fa-clock-rotate-left"></i> Results Announcement History</h4>
+                    <div style="overflow-x:auto;">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Sent At</th>
+                                    <th>Message</th>
+                                    <th>Recipients</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsAnnouncementsTableBody">
+                                <tr><td colspan="4" style="text-align:center;color:#64748b;">Loading history...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="facultyTab" class="tab-content">
+            <div class="management-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Faculty Management</h3>
+                    <button class="add-btn" onclick="openAddModal('faculty')">
+                        <i class="fas fa-plus"></i> Add Faculty
+                    </button>
+                </div>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Faculty ID</th>
+                            <th>Subject</th>
+                            <th>Qualification</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="facultyTableBody">
+                        <!-- Faculty will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="adminsTab" class="tab-content">
+            <div class="management-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-shield"></i> Admin Management</h3>
+                    <button class="add-btn" onclick="openAddModal('admin')">
+                        <i class="fas fa-plus"></i> Add Admin
+                    </button>
+                </div>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Admin ID</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminsTableBody">
+                        <!-- Admins will be loaded here -->
+                    </tbody>
+                </table>
+                <div id="profileSection" style="margin-top: 32px;">
+                    <h2>Your Profile</h2>
+                    <div id="profileContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add User</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group" id="studentIdGroup">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" name="studentId">
+                </div>
+                <div class="form-group" id="facultyIdGroup" style="display: none;">
+                    <label for="facultyId">Faculty ID</label>
+                    <input type="text" id="facultyId" name="facultyId">
+                </div>
+                <div class="form-group" id="adminIdGroup" style="display: none;">
+                    <label for="adminId">Admin ID</label>
+                    <input type="text" id="adminId" name="adminId">
+                </div>
+                <div class="form-group" id="departmentGroup">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" name="department">
+                </div>
+                <div class="form-group" id="subjectGroup" style="display: none;">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                <div class="form-group" id="qualificationGroup" style="display: none;">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" id="qualification" name="qualification">
+                </div>
+                <div class="form-group" id="roleGroup" style="display: none;">
+                    <label for="role">Role</label>
+                    <select id="role" name="role">
+                        <option value="admin">Admin</option>
+                        <option value="super-admin">Super Admin</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="save-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let currentUserType = 'students';
+        let editingUser = null;
+
+        // Check authentication
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+            if (!token || !user || user.role !== 'admin') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            currentUser = user;
+            document.getElementById('adminName').textContent = user.fullName;
+            loadDashboard();
+        }
+
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                const [studentsRes, facultyRes, adminsRes] = await Promise.all([
+                    fetch('http://localhost:5000/api/students'),
+                    fetch('http://localhost:5000/api/faculty'),
+                    fetch('http://localhost:5000/api/admins')
+                ]);
+
+                const students = await studentsRes.json();
+                const faculty = await facultyRes.json();
+                const admins = await adminsRes.json();
+
+                document.getElementById('studentsCount').textContent = students.length;
+                document.getElementById('facultyCount').textContent = faculty.length;
+                document.getElementById('adminsCount').textContent = admins.length;
+
+                renderUsers('students', students);
+                renderUsers('faculty', faculty);
+                renderUsers('admins', admins);
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+
+        // Render users in table
+        function renderUsers(type, users) {
+            const tbody = document.getElementById(`${type}TableBody`);
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                if (type === 'students') {
+                    row.innerHTML = `
+                        <td>${user.fullName}</td>
+                        <td>${user.email}</td>
+                        <td>${user.studentId || 'N/A'}</td>
+                        <td>${user.department || 'N/A'}</td>
+                        <td class="user-actions">
+                            <button class="action-btn edit-btn" onclick="editUser('${type}', '${user._id}')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteUser('${type}', '${user._id}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    `;
+                } else if (type === 'faculty') {
+                    row.innerHTML = `
+                        <td>${user.fullName}</td>
+                        <td>${user.email}</td>
+                        <td>${user.facultyId || 'N/A'}</td>
+                        <td>${user.subject || 'N/A'}</td>
+                        <td>${user.qualification || 'N/A'}</td>
+                        <td class="user-actions">
+                            <button class="action-btn edit-btn" onclick="editUser('${type}', '${user._id}')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteUser('${type}', '${user._id}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    `;
+                } else if (type === 'admins') {
+                    row.innerHTML = `
+                        <td>${user.fullName}</td>
+                        <td>${user.email}</td>
+                        <td>${user.adminId || 'N/A'}</td>
+                        <td>${user.role || 'admin'}</td>
+                        <td class="user-actions">
+                            <button class="action-btn edit-btn" onclick="editUser('${type}', '${user._id}')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteUser('${type}', '${user._id}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    `;
+                }
+                tbody.appendChild(row);
+            });
+        }
+
+        // Switch tabs
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+
+            currentUserType = tabName;
+        }
+
+        // Open add modal
+        function openAddModal(userType) {
+            editingUser = null;
+            document.getElementById('modalTitle').textContent = `Add ${userType.charAt(0).toUpperCase() + userType.slice(1)}`;
+            document.getElementById('userForm').reset();
+
+            // Show/hide relevant fields
+            toggleFormFields(userType);
+
+            document.getElementById('userModal').classList.add('show');
+        }
+
+        // Edit user
+        function editUser(userType, userId) {
+            // This would need to fetch user details from API
+            // For now, just open modal with type
+            editingUser = { type: userType, id: userId };
+            document.getElementById('modalTitle').textContent = `Edit ${userType.charAt(0).toUpperCase() + userType.slice(1)}`;
+            toggleFormFields(userType);
+            document.getElementById('userModal').classList.add('show');
+        }
+
+        // Delete user
+        async function deleteUser(userType, userId) {
+            if (!confirm('Are you sure you want to delete this user?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/${userType}/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    loadDashboard();
+                } else {
+                    alert('Error deleting user');
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+                alert('Error deleting user');
+            }
+        }
+
+        // Toggle form fields based on user type
+        function toggleFormFields(userType) {
+            const studentFields = ['studentIdGroup', 'departmentGroup'];
+            const facultyFields = ['facultyIdGroup', 'subjectGroup', 'qualificationGroup'];
+            const adminFields = ['adminIdGroup', 'roleGroup'];
+
+            // Hide all
+            [...studentFields, ...facultyFields, ...adminFields].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+
+            // Show relevant
+            if (userType === 'student') {
+                studentFields.forEach(id => document.getElementById(id).style.display = 'block');
+            } else if (userType === 'faculty') {
+                facultyFields.forEach(id => document.getElementById(id).style.display = 'block');
+            } else if (userType === 'admin') {
+                adminFields.forEach(id => document.getElementById(id).style.display = 'block');
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('userModal').classList.remove('show');
+            editingUser = null;
+        }
+
+        // Handle form submission
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const userData = Object.fromEntries(formData);
+
+            try {
+                let response;
+                if (editingUser) {
+                    // Update user
+                    response = await fetch(`http://localhost:5000/api/${editingUser.type}/${editingUser.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                } else {
+                    // Add new user
+                    response = await fetch(`http://localhost:5000/api/auth/register-${currentUserType.slice(0, -1)}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                }
+
+                if (response.ok) {
+                    closeModal();
+                    loadDashboard();
+                } else {
+                    const error = await response.json();
+                    alert(error.message || 'Error saving user');
+                }
+            } catch (error) {
+                console.error('Error saving user:', error);
+                alert('Error saving user');
+            }
+        });
+
+        const announceResultsForm = document.getElementById('announceResultsForm');
+        if (announceResultsForm) {
+            announceResultsForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const statusEl = document.getElementById('announceResultsStatus');
+                const branchInput = document.getElementById('announceBranch').value.trim();
+                const yearValue = document.getElementById('announceYear').value;
+                const message = document.getElementById('announceMessage').value.trim();
+
+                statusEl.textContent = 'Sending...';
+                statusEl.style.color = '#6b7280';
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/notifications/announce-results', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
+                        body: JSON.stringify({
+                            message,
+                            branch: branchInput || 'all',
+                            year: yearValue,
+                            type: 'info'
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok || !data.success) {
+                        statusEl.textContent = data.message || 'Failed to send announcement';
+                        statusEl.style.color = '#dc2626';
+                        return;
+                    }
+
+                    statusEl.textContent = data.message || 'Results announcement sent';
+                    statusEl.style.color = '#16a34a';
+                    announceResultsForm.reset();
+                    document.getElementById('announceYear').value = 'all';
+                    loadResultsAnnouncementHistory();
+                } catch (error) {
+                    statusEl.textContent = 'Error sending announcement';
+                    statusEl.style.color = '#dc2626';
+                }
+            });
+        }
+
+        async function loadResultsAnnouncementHistory() {
+            const tableBody = document.getElementById('resultsAnnouncementsTableBody');
+            if (!tableBody) return;
+            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#64748b;">Loading history...</td></tr>';
+            try {
+                const response = await fetch('http://localhost:5000/api/notifications/announce-results/history?limit=20', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                const data = await response.json();
+                if (!response.ok || !data.success) {
+                    tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#dc2626;">Failed to load history.</td></tr>';
+                    return;
+                }
+                const items = Array.isArray(data.announcements) ? data.announcements : [];
+                if (items.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#64748b;">No results announcements yet.</td></tr>';
+                    return;
+                }
+                tableBody.innerHTML = items.map((item) => `
+                    <tr>
+                        <td>${item.announced_at || '-'}</td>
+                        <td style="max-width:460px;white-space:normal;">${item.message || '-'}</td>
+                        <td>${item.recipients || 0}</td>
+                        <td>${item.type || 'info'}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#dc2626;">Error loading history.</td></tr>';
+            }
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'landing.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadAdminProfile();
+            loadResultsAnnouncementHistory();
+        });
+
+        function loadAdminProfile() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const profileContent = document.getElementById('profileContent');
+            if (!profileContent) return;
+            profileContent.innerHTML = `
+                <form id="editProfileForm" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div>
+                        <label style="color: #6b7280; font-size: 12px;">Full Name</label>
+                        <input type="text" name="fullName" value="${user.fullName}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd;">
+                    </div>
+                    <div>
+                        <label style="color: #6b7280; font-size: 12px;">Admin ID</label>
+                        <input type="text" name="adminId" value="${user.adminId}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd;" disabled>
+                    </div>
+                    <div>
+                        <label style="color: #6b7280; font-size: 12px;">Email</label>
+                        <input type="email" name="email" value="${user.email}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd;">
+                    </div>
+                    <div>
+                        <label style="color: #6b7280; font-size: 12px;">Role</label>
+                        <input type="text" name="role" value="${user.role}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd;">
+                    </div>
+                    <div style="grid-column: span 2; text-align:right;">
+                        <button type="submit" style="background:#9333ea;color:white;padding:10px 24px;border:none;border-radius:8px;font-weight:600;">Save Changes</button>
+                    </div>
+                </form>
+                <div id="profileStatus" style="grid-column: span 2; margin-top: 12px;"></div>
+            `;
+
+            document.getElementById('editProfileForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+                const updatedProfile = Object.fromEntries(formData);
+                const token = localStorage.getItem('token');
+                try {
+                    const res = await fetch(`http://localhost:5000/api/admin/profile/${user.adminId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(updatedProfile)
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        document.getElementById('profileStatus').innerHTML = '<span style="color:green;font-weight:600;">Profile updated successfully!</span>';
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        loadAdminProfile();
+                    } else {
+                        document.getElementById('profileStatus').innerHTML = '<span style="color:red;">Error: ' + (data.error || 'Failed to update profile') + '</span>';
+                    }
+                } catch (err) {
+                    document.getElementById('profileStatus').innerHTML = '<span style="color:red;">Error: ' + err.message + '</span>';
+                }
+            });
+        }
+    // Notifications logic
+    async function loadNotifications(userId) {
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch(`http://localhost:5000/api/notifications/user/${userId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            const section = document.getElementById('notificationsSection');
+            if (data.success && data.notifications.length > 0) {
+                section.innerHTML = data.notifications.map(n => `
+                    <div class="notification-card" style="background: #f3f4f6; border-left: 4px solid ${n.type === 'info' ? '#3b82f6' : n.type === 'warning' ? '#f59e0b' : '#ef4444'}; padding: 16px; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="font-weight:600;">${n.type.charAt(0).toUpperCase() + n.type.slice(1)}:</div>
+                        <div>${n.message}</div>
+                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">${new Date(n.created_at).toLocaleString()}</div>
+                    </div>
+                `).join('');
+            } else {
+                section.innerHTML = '';
+            }
+        } catch (err) {
+            document.getElementById('notificationsSection').innerHTML = '';
+        }
+    }
+
+    // Patch checkAuth to call loadNotifications
+    function checkAuth() {
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+        if (!token || !user || user.role !== 'admin') {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        currentUser = user;
+        document.getElementById('adminName').textContent = user.fullName;
+        loadNotifications(user.id);
+        loadDashboard();
+    }
+    </script>
+</body>
+</html>

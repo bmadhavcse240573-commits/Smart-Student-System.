@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Innovation Summit - Innosphere Smart System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 60px 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .event-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4facfe;
+        }
+
+        /* Event Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, #e0f7ff 0%, #d4f8ff 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .detail-item i {
+            font-size: 1.8rem;
+            color: #4facfe;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Description */
+        .description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Agenda */
+        .agenda-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .agenda-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-left: 4px solid #4facfe;
+            border-radius: 8px;
+        }
+
+        .agenda-time {
+            min-width: 100px;
+            font-weight: 600;
+            color: #4facfe;
+        }
+
+        .agenda-content {
+            flex: 1;
+        }
+
+        .agenda-content h4 {
+            margin-bottom: 0.25rem;
+            color: #1f2937;
+        }
+
+        .agenda-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Speakers */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .speaker-card {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .speaker-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .speaker-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .speaker-title {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .register-btn {
+            background: white;
+            color: #4facfe;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .event-badges {
+                flex-direction: column;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Smart System</div>
+            <a href="landing.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Events</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🚀 AI Innovation Summit</h1>
+            <p>Connect with AI experts and industry leaders at our flagship innovation summit</p>
+            <div class="event-badges">
+                <div class="badge"><i class="fas fa-calendar"></i> February 25, 2026</div>
+                <div class="badge"><i class="fas fa-clock"></i> 9:00 AM - 6:00 PM</div>
+                <div class="badge"><i class="fas fa-map-marker-alt"></i> Auditorium</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Event Details -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Event Details</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="detail-label">Date</div>
+                    <div class="detail-value">Feb 25, 2026</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="detail-label">Time</div>
+                    <div class="detail-value">9:00 AM - 6:00 PM</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value">Auditorium</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-users"></i>
+                    <div class="detail-label">Capacity</div>
+                    <div class="detail-value">800 Participants</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-file-alt"></i> About This Summit</h2>
+            <p class="description">
+                Welcome to the premier AI Innovation Summit—where cutting-edge research meets real-world applications. This annual flagship event brings together AI researchers, industry leaders, entrepreneurs, and students to explore the latest advances in Artificial Intelligence, Machine Learning, Deep Learning, and Generative AI.
+                <br><br>
+                Featuring keynote presentations from renowned AI experts, interactive panel discussions, networking sessions, and live demonstrations of breakthrough AI technologies. This is a unique opportunity to learn from the best, network with peers, and discover future career opportunities in the rapidly evolving AI landscape.
+            </p>
+        </div>
+
+        <!-- Agenda -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-list"></i> Summit Agenda</h2>
+            <ul class="agenda-list">
+                <li class="agenda-item">
+                    <div class="agenda-time">9:00 - 9:30 AM</div>
+                    <div class="agenda-content">
+                        <h4>Registration & Welcome Breakfast</h4>
+                        <p>Networking over breakfast with coffee and refreshments</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">9:30 - 10:30 AM</div>
+                    <div class="agenda-content">
+                        <h4>Keynote Speech: "Future of AI"</h4>
+                        <p>Dr. Fei-Fei Li sharing insights on AI's future direction</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">10:30 - 11:15 AM</div>
+                    <div class="agenda-content">
+                        <h4>Track 1: Machine Learning Advances</h4>
+                        <p>Latest developments in supervised and unsupervised learning</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">11:15 AM - 12:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Track 2: Generative AI & LLMs</h4>
+                        <p>In-depth look at ChatGPT, BERT, and transformer models</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">12:00 - 1:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Lunch & Networking</h4>
+                        <p>Meal with keynote speaker Q&A</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">1:00 - 2:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Panel Discussion: AI in Industry</h4>
+                        <p>Industry leaders discussing real-world AI applications</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">2:00 - 3:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Startup Showcase</h4>
+                        <p>AI startups pitching their innovations</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">3:00 - 3:30 PM</div>
+                    <div class="agenda-content">
+                        <h4>Coffee Break</h4>
+                        <p>Refreshments and networking</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">3:30 - 4:30 PM</div>
+                    <div class="agenda-content">
+                        <h4>Workshops & Hands-on Demos</h4>
+                        <p>Interactive AI tools demonstrations (A/B testing)</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">4:30 - 5:30 PM</div>
+                    <div class="agenda-content">
+                        <h4>Career Fair & Networking</h4>
+                        <p>Meet with top AI companies for career opportunities</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">5:30 - 6:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Closing Remarks & Prizes</h4>
+                        <p>Certificate presentation and awards ceremony</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Speakers -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-microphone"></i> Featured Speakers</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-avatar">🤖</div>
+                    <div class="speaker-name">Dr. Fei-Fei Li</div>
+                    <div class="speaker-title">AI Visionary</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">Co-Director, Stanford HAI</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar">🧠</div>
+                    <div class="speaker-name">Prof. Yann LeCun</div>
+                    <div class="speaker-title">Deep Learning Pioneer</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">Chief AI Scientist, Meta</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar">⚡</div>
+                    <div class="speaker-name">Dr. Andrew Ng</div>
+                    <div class="speaker-title">ML Expert</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">Founder, DeepLearning.AI</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar">🎯</div>
+                    <div class="speaker-name">Sundar Pichai</div>
+                    <div class="speaker-title">Industry Leader</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">CEO, Google</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="content-card">
+            <div class="cta-section">
+                <h2>Don't Miss the Premier AI Event of the Year!</h2>
+                <p>Reserve your seat now and be part of the AI revolution. Limited spots available!</p>
+                <button class="register-btn" onclick="alert('Registration feature coming soon! Please check your email for more details.')">Register Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Innosphere Smart System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

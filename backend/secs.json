@@ -1,0 +1,20 @@
+[
+  {
+    "Section_ID": 7,
+    "Section_Name": "A",
+    "Branch": "CSE",
+    "Year": 2
+  },
+  {
+    "Section_ID": 8,
+    "Section_Name": "B",
+    "Branch": "CSE",
+    "Year": 2
+  },
+  {
+    "Section_ID": 9,
+    "Section_Name": "C",
+    "Branch": "CSE",
+    "Year": 2
+  }
+]

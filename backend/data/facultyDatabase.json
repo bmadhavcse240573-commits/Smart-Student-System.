@@ -1,0 +1,64 @@
+{
+  "faculty": [
+    {
+      "Faculty_ID": "FAC001",
+      "Name": "Dr. Ashok Kumar",
+      "Branch": "Computer Science",
+      "Designation": "Professor",
+      "Qualification": "PhD",
+      "Email": "ashok.kumar@college.edu",
+      "Phone": "9123456780",
+      "Experience_Years": 15,
+      "Date_of_Joining": "2009-01-15",
+      "password": "Ashok@2026"
+    },
+    {
+      "Faculty_ID": "FAC002",
+      "Name": "Dr. Neha Sharma",
+      "Branch": "Computer Science",
+      "Designation": "Associate Professor",
+      "Qualification": "PhD",
+      "Email": "neha.sharma@college.edu",
+      "Phone": "9123456781",
+      "Experience_Years": 10,
+      "Date_of_Joining": "2014-06-20",
+      "password": "Neha@2026"
+    },
+    {
+      "Faculty_ID": "FAC003",
+      "Name": "Prof. Rajesh Singh",
+      "Branch": "Electronics",
+      "Designation": "Professor",
+      "Qualification": "M.Tech",
+      "Email": "rajesh.singh@college.edu",
+      "Phone": "9123456782",
+      "Experience_Years": 18,
+      "Date_of_Joining": "2006-08-10",
+      "password": "Rajesh@2026"
+    },
+    {
+      "Faculty_ID": "FAC004",
+      "Name": "Dr. Priya Verma",
+      "Branch": "Mechanical",
+      "Designation": "Associate Professor",
+      "Qualification": "PhD",
+      "Email": "priya.verma@college.edu",
+      "Phone": "9123456783",
+      "Experience_Years": 8,
+      "Date_of_Joining": "2016-02-01",
+      "password": "Priya@2026"
+    },
+    {
+      "Faculty_ID": "FAC005",
+      "Name": "Prof. Vikram Patel",
+      "Branch": "Civil",
+      "Designation": "Assistant Professor",
+      "Qualification": "M.Tech",
+      "Email": "vikram.patel@college.edu",
+      "Phone": "9123456784",
+      "Experience_Years": 5,
+      "Date_of_Joining": "2019-07-15",
+      "password": "Vikram@2026"
+    }
+  ]
+}

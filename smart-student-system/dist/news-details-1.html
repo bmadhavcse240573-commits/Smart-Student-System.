@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackSavvy 2026 - Innosphere Smart System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: -30px auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 80px;
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            color: #555;
+            line-height: 1.9;
+        }
+
+        .article-content h2 {
+            color: #1f2937;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .share-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .share-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cta-btn {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Registration Form */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.2);
+            border-color: white;
+        }
+
+        .register-btn {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .register-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .register-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .success-message, .error-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.2);
+            color: #dcfce7;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fecaca;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .news-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Smart System</div>
+            <a href="landing.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to News</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>💡 HackSavvy 2026 - National Level Hackathon</h1>
+            <div class="news-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> February 16, 2026</div>
+                <div class="meta-item"><i class="fas fa-user"></i> Admin Team</div>
+                <div class="meta-item"><i class="fas fa-clock"></i> 5 min read</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-card">
+            <div class="article-image">💡</div>
+            
+            <div class="article-content">
+                <h2>Introducing HackSavvy 2026</h2>
+                <p>We are thrilled to announce HackSavvy 2026, a national-level hackathon designed to foster innovation, creativity, and problem-solving skills among students across the country. This is a unique opportunity for budding developers, designers, and entrepreneurs to showcase their talents and compete for exciting prizes.</p>
+
+                <h2>Event Highlights</h2>
+                <ul>
+                    <li><strong>Duration:</strong> 24-Hour coding marathon</li>
+                    <li><strong>Participation:</strong> Open to all college students across India</li>
+                    <li><strong>Prizes:</strong> Total prize pool of Rs. 5 Lakhs</li>
+                    <li><strong>Categories:</strong> AI/ML, Web Development, Mobile Apps, IoT, Blockchain</li>
+                    <li><strong>Mentorship:</strong> Industry experts as judges and mentors</li>
+                </ul>
+
+                <h2>Why Participate?</h2>
+                <p>HackSavvy 2026 offers an excellent platform to:</p>
+                <ul>
+                    <li>Network with talented developers and innovators from across the country</li>
+                    <li>Learn from industry experts and get mentorship</li>
+                    <li>Showcase your innovative ideas and technical skills</li>
+                    <li>Win exciting prizes and recognition</li>
+                    <li>Build projects that can have real-world impact</li>
+                    <li>Explore potential career opportunities with sponsors</li>
+                </ul>
+
+                <h2>Registration Details</h2>
+                <p>Registrations are now open for teams of 2-4 members. Each team can submit one project idea during the registration phase. Early bird registrations get special discounts and additional perks.</p>
+
+                <p>We believe that HackSavvy 2026 will be a transformative experience for all participants. It's not just about hacks and code; it's about bringing ideas to life and making a difference. We invite you to be part of this exciting journey!</p>
+
+                <h2>Contact & Support</h2>
+                <p>For any queries or support, please contact the organizing team at hacksavvy@smartstudent.edu or call +91-XXXX-XXXX-XX. You can also visit our website for more details and updates.</p>
+
+                <div class="share-section">
+                    <h3><i class="fas fa-share-alt"></i> Share This News</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn"><i class="fas fa-facebook"></i> Facebook</a>
+                        <a href="#" class="share-btn"><i class="fas fa-twitter"></i> Twitter</a>
+                        <a href="#" class="share-btn"><i class="fas fa-linkedin"></i> LinkedIn</a>
+                        <a href="#" class="share-btn"><i class="fas fa-envelope"></i> Email</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="content-card">
+            <div class="cta-section">
+                <h2>Ready to Participate?</h2>
+                <p>Join thousands of innovators and showcase your skills at HackSavvy 2026!</p>
+                <div id="successMessage" class="success-message"></div>
+                <div id="errorMessage" class="error-message"></div>
+                <form id="registrationForm" onsubmit="handleRegistration(event)">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
+                    </div>
+                    <button type="submit" class="register-btn">Register Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Innosphere Smart System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        async function handleRegistration(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            const submitBtn = e.target.querySelector('button');
+
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Registering...';
+
+            try {
+                const response = await fetch('http://localhost:5000/api/events/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        eventId: 'news-1',
+                        eventName: 'HackSavvy 2026 Hackathon',
+                        studentName: name,
+                        studentEmail: email,
+                        studentPhone: phone
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    successMsg.textContent = '✅ ' + data.message;
+                    successMsg.style.display = 'block';
+                    document.getElementById('registrationForm').reset();
+                    submitBtn.textContent = 'Register Now';
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMsg.textContent = '❌ ' + data.message;
+                    errorMsg.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Registration error:', err);
+                errorMsg.textContent = '❌ Backend server not running. Make sure the server is started on port 5000.';
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Now';
+            }
+        }
+    </script>
+</body>
+</html>

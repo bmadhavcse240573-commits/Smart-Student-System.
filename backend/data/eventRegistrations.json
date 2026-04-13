@@ -1,0 +1,34 @@
+{
+  "registrations": [
+    {
+      "id": "1771674407131",
+      "eventId": "news-1",
+      "eventName": "HackSavvy 2026 Hackathon",
+      "studentName": "Charitha Varaganti",
+      "studentEmail": "varaganticharitha1@gmail.com",
+      "studentPhone": "8008113584",
+      "registeredAt": "2026-02-21T11:46:47.131Z",
+      "status": "confirmed"
+    },
+    {
+      "id": "1771674711517",
+      "eventId": "news-1",
+      "eventName": "HackSavvy",
+      "studentName": "Test",
+      "studentEmail": "test@test.com",
+      "studentPhone": "9999999999",
+      "registeredAt": "2026-02-21T11:51:51.517Z",
+      "status": "confirmed"
+    },
+    {
+      "id": "1771674787971",
+      "eventId": "news-1",
+      "eventName": "Test Event",
+      "studentName": "John Doe",
+      "studentEmail": "john@test.com",
+      "studentPhone": "9999999999",
+      "registeredAt": "2026-02-21T11:53:07.971Z",
+      "status": "confirmed"
+    }
+  ]
+}

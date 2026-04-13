@@ -1,0 +1,18 @@
+{
+  "name": "smart-fullstack",
+  "private": true,
+  "description": "Run backend (API) + smart-student-system (frontend) together",
+  "scripts": {
+    "start": "npm run dev",
+    "backend": "npm --prefix backend start",
+    "frontend": "npm --prefix smart-student-system run start",
+    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run backend\" \"npm run frontend\"",
+    "build:frontend": "npm --prefix smart-student-system run build"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

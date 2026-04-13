@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innosphere Smart System</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Manrope, sans-serif; color: #e9efff; }
+
+    #opening-animation { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: linear-gradient(135deg, #2a0f57 0%, #4f1db4 45%, #091326 100%); transition: opacity .8s ease, visibility .8s ease; }
+    #opening-animation.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .opening-inner { text-align: center; }
+    .opening-logo-image { width: min(320px, 72vw); aspect-ratio: 1 / 1; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 46px rgba(0, 0, 0, .45), 0 0 0 2px rgba(255,255,255,.14); }
+    .opening-logo-text { margin-top: 18px; font-size: clamp(26px, 4vw, 44px); font-weight: 800; }
+    .opening-sub { margin-top: 8px; color: #c7d6ff; }
+    .opening-bar { width: min(320px, 70vw); height: 8px; margin: 18px auto 0; border-radius: 999px; background: rgba(255,255,255,.22); overflow: hidden; }
+    .opening-bar span { display: block; width: 100%; height: 100%; transform: translateX(-100%); background: linear-gradient(90deg, #8b5cf6, #fff, #42c6ff); animation: openingLoad 4.8s ease forwards; }
+    @keyframes openingLoad { to { transform: translateX(0); } }
+
+    .page { opacity: 0; transform: translateY(8px); transition: opacity .8s ease, transform .8s ease; }
+    body.page-ready .page { opacity: 1; transform: translateY(0); }
+
+    .top-strip { background: rgba(7, 12, 31, .9); border-bottom: 1px solid rgba(255,255,255,.12); }
+    .top-strip-inner { max-width: 1200px; margin: 0 auto; padding: 9px 16px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: #cdd9ff; }
+    .top-strip i { color: #42c6ff; margin-right: 6px; }
+
+    .main-nav { position: sticky; top: 0; z-index: 50; background: rgba(8, 12, 29, .78); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.12); }
+    .main-nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .brand { font-weight: 800; font-size: clamp(20px, 3vw, 30px); background: linear-gradient(135deg, #8b5cf6, #42c6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: #cdd9ff; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; }
+    .nav-links a:hover { border-color: #42c6ff; color: #e9efff; }
+    .nav-links a.login { background: linear-gradient(135deg, #8b5cf6, #42c6ff); color: #fff; border: 0; }
+
+    .nav-logo-strip { max-width: 1200px; margin: 14px auto 0; padding: 0 16px; }
+    .nav-logo-box { display: flex; align-items: center; justify-content: center; gap: 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: linear-gradient(155deg, rgba(255,255,255,.1), rgba(255,255,255,.04)); padding: 10px 14px; }
+    .nav-logo-box img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); }
+    .nav-logo-box b { font-size: clamp(16px, 2vw, 22px); color: #eef5ff; }
+
+    .campus-slider { max-width: 1200px; margin: 14px auto 0; padding: 0 16px; }
+    .campus-slider-wrap { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid rgba(255,255,255,.15); box-shadow: 0 20px 45px rgba(3, 8, 24, .45); min-height: 340px; background: #0a142f; }
+    .campus-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .65s ease; }
+    .campus-slide.active { opacity: 1; }
+    .campus-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .campus-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,12,29,.16), rgba(8,12,29,.66)); }
+    .campus-caption { position: absolute; left: 20px; bottom: 18px; z-index: 2; color: #f2f7ff; font-weight: 700; letter-spacing: .02em; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+    .campus-dots { position: absolute; right: 16px; bottom: 14px; z-index: 2; display: flex; gap: 8px; }
+    .campus-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(255,255,255,.7); background: rgba(255,255,255,.35); cursor: pointer; }
+    .campus-dot.active { background: linear-gradient(135deg, #8b5cf6, #42c6ff); border-color: transparent; }
+
+    .hero { max-width: 1200px; margin: 16px auto 20px; padding: 0 16px; }
+    .hero-wrap { border-radius: 20px; border: 1px solid rgba(255,255,255,.15); overflow: hidden; box-shadow: 0 20px 45px rgba(3, 8, 24, .45); background: linear-gradient(120deg, rgba(7,12,31,.9), rgba(29,20,74,.82), rgba(17,49,111,.76)); min-height: 420px; display: flex; align-items: center; position: relative; }
+    .hero-wrap::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 78% 30%, rgba(67,200,255,.22), transparent 38%), radial-gradient(circle at 16% 82%, rgba(139,92,246,.22), transparent 40%); pointer-events: none; }
+    .hero-content { width: min(700px, 100%); padding: clamp(22px, 5vw, 52px); position: relative; z-index: 2; }
+    .hero-kicker { display: inline-block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #9be9ff; border: 1px solid rgba(67,200,255,.45); border-radius: 999px; padding: 6px 10px; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(30px, 5vw, 58px); line-height: 1.05; margin-bottom: 12px; }
+    .hero p { color: #d3deff; font-size: clamp(15px, 2.2vw, 18px); margin-bottom: 20px; max-width: 62ch; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hero-actions a { text-decoration: none; padding: 11px 16px; border-radius: 12px; font-weight: 700; font-size: 14px; }
+    .hero-actions .primary { background: linear-gradient(135deg, #8b5cf6, #42c6ff); color: #fff; }
+    .hero-actions .secondary { border: 1px solid rgba(255,255,255,.18); background: rgba(7,12,31,.42); color: #d9e6ff; }
+
+    .quick-links { max-width: 1200px; margin: 0 auto 18px; padding: 0 16px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .quick-card { text-decoration: none; border: 1px solid rgba(255,255,255,.14); background: linear-gradient(155deg, rgba(255,255,255,.1), rgba(255,255,255,.04)); border-radius: 14px; padding: 15px; color: #d4e2ff; font-weight: 700; }
+    .quick-card i { color: #42c6ff; margin-right: 8px; }
+
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 24px; }
+    .three-col { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 14px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .panel { border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: linear-gradient(155deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); padding: 18px; }
+    .panel h2 { font-size: 20px; margin-bottom: 12px; }
+    .panel h2 i { color: #42c6ff; margin-right: 8px; }
+
+    .list-item { display: block; text-decoration: none; color: #dbe6ff; border: 1px solid rgba(255,255,255,.1); background: rgba(8,14,32,.58); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+    .list-item:hover { border-color: #42c6ff; }
+    .list-item small { color: #9db6ed; display: block; margin-top: 6px; }
+
+    .recruiters { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { border: 1px solid rgba(255,255,255,.14); background: rgba(67,200,255,.14); color: #cfefff; border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 700; }
+
+    .stats { max-width: 1200px; margin: 0 auto 18px; padding: 0 16px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .stat { border: 1px solid rgba(255,255,255,.14); background: linear-gradient(155deg, rgba(255,255,255,.1), rgba(255,255,255,.04)); border-radius: 14px; padding: 16px; text-align: center; }
+    .stat b { display: block; font-size: clamp(26px, 4vw, 38px); background: linear-gradient(135deg, #8b5cf6, #42c6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat span { color: #c7d7ff; font-size: 14px; }
+
+    .footer { border-top: 1px solid rgba(255,255,255,.14); background: rgba(6,10,26,.8); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 22px 16px; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 14px; }
+    .footer h4 { margin-bottom: 8px; }
+    .footer p, .footer li, .footer a { color: #b6c9f8; font-size: 14px; text-decoration: none; }
+    .footer ul { list-style: none; display: grid; gap: 6px; }
+    .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,.1); padding: 12px 16px; color: #8ea8df; font-size: 13px; }
+
+    @media (max-width: 1000px) {
+      .three-col { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .quick-links { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .quick-links { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .top-strip-inner { font-size: 12px; }
+    }
+  </style>
+</head>
+<body class="page-intro">
+  <div id="opening-animation">
+    <div class="opening-inner">
+      <img class="opening-logo-image" src="assets/innosphere-smart-system.jpeg" alt="Innosphere Smart System">
+      <div class="opening-logo-text">Innosphere Smart System</div>
+      <div class="opening-sub">Preparing your campus experience</div>
+      <div class="opening-bar"><span></span></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="top-strip">
+      <div class="top-strip-inner">
+        <div><i class="fa-solid fa-phone"></i> Admissions Helpdesk: +91 40 2419 3057</div>
+        <div><i class="fa-solid fa-envelope"></i> support@innosphere.edu | <i class="fa-solid fa-calendar"></i> 2026-27 Admissions Open</div>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <div class="main-nav-inner">
+        <div class="brand">Innosphere Smart System</div>
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="academics.html">Academics</a>
+          <a href="announcements.html">Announcements</a>
+          <a href="placements.html">Placements</a>
+          <a href="library.html">Library</a>
+          <a href="admin-dashboard.html">Admin Login</a>
+          <a href="login.html" class="login">Portal Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="nav-logo-strip" aria-label="Innosphere Identity">
+      <div class="nav-logo-box">
+        <img src="assets/innosphere-smart-system.jpeg" alt="Innosphere Logo">
+        <b>Innosphere Smart System</b>
+      </div>
+    </section>
+
+    <section class="campus-slider" aria-label="Campus Gallery">
+      <div class="campus-slider-wrap" id="campusSlider">
+        <figure class="campus-slide active">
+          <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80" alt="College Campus Main Building">
+          <figcaption class="campus-caption">Innosphere Main Academic Block</figcaption>
+        </figure>
+        <figure class="campus-slide">
+          <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1600&q=80" alt="College Innovation Center">
+          <figcaption class="campus-caption">Innovation and Research Center</figcaption>
+        </figure>
+        <figure class="campus-slide">
+          <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=1600&q=80" alt="College Auditorium">
+          <figcaption class="campus-caption">Central Auditorium and Events Wing</figcaption>
+        </figure>
+        <figure class="campus-slide">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80" alt="College Laboratories">
+          <figcaption class="campus-caption">Advanced Engineering Laboratories</figcaption>
+        </figure>
+        <figure class="campus-slide">
+          <img src="https://images.unsplash.com/photo-1462536943532-57a629f6cc60?auto=format&fit=crop&w=1600&q=80" alt="College Library and Learning Commons">
+          <figcaption class="campus-caption">Library and Learning Commons</figcaption>
+        </figure>
+        <figure class="campus-slide">
+          <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=1600&q=80" alt="College Student Activity Zone">
+          <figcaption class="campus-caption">Student Activity and Collaboration Zone</figcaption>
+        </figure>
+        <div class="campus-dots" id="campusSliderDots"></div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-wrap">
+        <div class="hero-content">
+          <span class="hero-kicker">Digital Campus Ecosystem</span>
+          <h1>Build Future-Ready Engineers With Smarter Academic Operations</h1>
+          <p>Innosphere brings admissions, academics, announcements, placements, library services, and student analytics into a single integrated platform for your entire campus.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-links" id="quick-access">
+      <a class="quick-card" href="academic-calendar.html"><i class="fa-regular fa-calendar"></i>Academic Calendar</a>
+      <a class="quick-card" href="announcements.html" id="announcement-board"><i class="fa-regular fa-bell"></i>Notice Board</a>
+      <a class="quick-card" href="event-details-1.html" id="events"><i class="fa-regular fa-compass"></i>Upcoming Events</a>
+      <a class="quick-card" href="placements.html" id="recruiters"><i class="fa-solid fa-briefcase"></i>Top Recruiters</a>
+    </section>
+
+    <section class="section-wrap">
+      <div class="three-col">
+        <article class="panel">
+          <h2><i class="fa-regular fa-newspaper"></i>Latest News</h2>
+          <a class="list-item" href="news-details-1.html">Innosphere Launches AI Mentoring Program For Final Year Students<small>March 28, 2026</small></a>
+          <a class="list-item" href="news-details-2.html">National Innovation Challenge: Innosphere Teams Win Top Honors<small>March 24, 2026</small></a>
+          <a class="list-item" href="news-details-3.html">Industry Connect Week Brings 30+ Visiting Experts To Campus<small>March 21, 2026</small></a>
+        </article>
+
+        <article class="panel">
+          <h2><i class="fa-regular fa-clipboard"></i>Announcements</h2>
+          <a class="list-item" href="announcements.html">Semester Examination Circular And Hall Ticket Guidelines<small>Updated 2 days ago</small></a>
+          <a class="list-item" href="announcements.html">Fee Payment Window For Current Semester Is Now Live<small>Updated 5 days ago</small></a>
+          <a class="list-item" href="announcements.html">Workshop Registration Open: GenAI For Engineering Students<small>Updated 1 week ago</small></a>
+        </article>
+
+        <article class="panel">
+          <h2><i class="fa-regular fa-star"></i>Placement Highlights</h2>
+          <a class="list-item" href="placements.html">95% campus placement trend maintained across core branches</a>
+          <a class="list-item" href="placements.html">Highest package reached 18 LPA in current cycle</a>
+          <div class="recruiters">
+            <span class="pill">TCS</span>
+            <span class="pill">Accenture</span>
+            <span class="pill">Capgemini</span>
+            <span class="pill">Deloitte</span>
+            <span class="pill">Amazon</span>
+            <span class="pill">Wipro</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="two-col">
+        <article class="panel" id="events-panel">
+          <h2><i class="fa-regular fa-calendar-check"></i>Upcoming Events</h2>
+          <a class="list-item" href="event-details-1.html">Innosphere TechFest 2026: Innovation Expo Week<small>April 05, 2026</small></a>
+          <a class="list-item" href="event-details-2.html">Campus Placement Readiness Bootcamp<small>April 09, 2026</small></a>
+          <a class="list-item" href="event-details-3.html">Faculty Development Program On AI In Education<small>April 13, 2026</small></a>
+        </article>
+
+        <article class="panel" id="news-panel">
+          <h2><i class="fa-regular fa-newspaper"></i>News & Updates</h2>
+          <a class="list-item" href="news-details-4.html">Research Cell Announces New Student Innovation Grants<small>March 19, 2026</small></a>
+          <a class="list-item" href="news-details-5.html">Industry Partnership Program Expanded With 12 New Companies<small>March 16, 2026</small></a>
+          <a class="list-item" href="news-details-6.html">Innosphere Alumni Network Launches Career Mentorship Circle<small>March 11, 2026</small></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats">
+      <article class="stat"><b>4,000+</b><span>Students Managed</span></article>
+      <article class="stat"><b>500+</b><span>Recruiters Connected</span></article>
+      <article class="stat"><b>95%</b><span>Campus Placements</span></article>
+      <article class="stat"><b>18 LPA</b><span>Highest Package</span></article>
+    </section>
+
+    <footer class="footer" id="contact">
+      <div class="footer-inner">
+        <div>
+          <h4>Innosphere Smart System</h4>
+          <p>Kokapet Campus Avenue, Hyderabad - 500075</p>
+          <p>Email: support@innosphere.edu</p>
+          <p>Phone: +91 40 2419 3057</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="regulations-syllabus.html">Regulations</a></li>
+            <li><a href="library.html">Library</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Student Services</h4>
+          <ul>
+            <li><a href="dashboard-student.html">Student Dashboard</a></li>
+            <li><a href="dashboard-faculty.html">Faculty Dashboard</a></li>
+            <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+            <li><a href="login.html">Portal Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Innosphere Smart System. Smart Learning. Smart Management. Smart Future.</div>
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      var openingAnimation = document.getElementById('opening-animation');
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var revealDelay = reduceMotion ? 0 : 4200;
+      var removeDelay = reduceMotion ? 0 : 5600;
+
+      setTimeout(function () {
+        openingAnimation.classList.add('hidden');
+        document.body.classList.remove('page-intro');
+        document.body.classList.add('page-ready');
+      }, revealDelay);
+
+      setTimeout(function () {
+        if (openingAnimation) openingAnimation.remove();
+      }, removeDelay);
+
+      var slider = document.getElementById('campusSlider');
+      var dotsHost = document.getElementById('campusSliderDots');
+      if (!slider || !dotsHost) return;
+
+      var slides = Array.prototype.slice.call(slider.querySelectorAll('.campus-slide'));
+      if (!slides.length) return;
+
+      var activeIndex = 0;
+      var timer = null;
+
+      function renderDots() {
+        dotsHost.innerHTML = slides.map(function (_s, idx) {
+          return '<button class="campus-dot' + (idx === activeIndex ? ' active' : '') + '" type="button" aria-label="Show slide ' + (idx + 1) + '" data-slide-index="' + idx + '"></button>';
+        }).join('');
+      }
+
+      function showSlide(nextIndex) {
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides.forEach(function (slide, idx) {
+          slide.classList.toggle('active', idx === activeIndex);
+        });
+        renderDots();
+      }
+
+      function startAuto() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(function () {
+          showSlide(activeIndex + 1);
+        }, 3200);
+      }
+
+      dotsHost.addEventListener('click', function (event) {
+        var btn = event.target.closest('.campus-dot');
+        if (!btn) return;
+        var next = Number(btn.getAttribute('data-slide-index') || 0);
+        showSlide(next);
+        startAuto();
+      });
+
+      showSlide(0);
+      startAuto();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "17716135220790.8387611630084882",
+    "fullName": "Bele Madhav",
+    "email": "bmadhav349@gmail.com",
+    "password": "Madhav@05",
+    "studentId": "24261A0573",
+    "department": "Computer Science"
+  },
+  {
+    "_id": "17716147590520.37639920182345554",
+    "fullName": "Bele Madhav",
+    "email": "bmadhavcse_240573@mgit.ac.in",
+    "password": "Madhav@05",
+    "studentId": "24261A0573",
+    "department": "Computer Science"
+  },
+  {
+    "_id": "17735834538290.5879504658046513",
+    "fullName": "Bele Mahdav",
+    "email": "bmadhav@gmail.com",
+    "password": "Madhav@05",
+    "studentId": "STU-26573",
+    "department": "Computer Science"
+  },
+  {
+    "_id": "17735838916440.9774824513838588",
+    "fullName": "Bele Sravanthi",
+    "email": "sravanthi@gmail.com",
+    "password": "Madhav@05",
+    "studentId": "STU-26570",
+    "department": "Computer Science"
+  }
+]

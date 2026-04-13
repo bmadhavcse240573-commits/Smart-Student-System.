@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS credentials (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  user_id VARCHAR(50) NOT NULL,
+  user_name VARCHAR(255) NOT NULL,
+  user_type ENUM('student', 'faculty', 'admin') NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

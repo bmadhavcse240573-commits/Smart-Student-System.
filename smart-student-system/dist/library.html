@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | Innosphere Smart System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { margin: 0; font-family: Inter, Arial, sans-serif; background: #f8fafc; color: #1f2937; }
+        .top { background: #111827; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .top a { color: #fff; text-decoration: none; font-weight: 600; margin-left: 12px; }
+        .wrap { max-width: 1120px; margin: 32px auto; padding: 0 20px; }
+        .hero { background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; border-radius: 16px; padding: 28px; }
+        .hero h1 { margin: 0 0 10px; }
+        .hero p { margin: 0; opacity: 0.95; }
+        .section-title { margin: 26px 0 12px; font-size: 24px; color: #0f172a; }
+        .muted { color: #475569; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        .stat-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; text-align: center; }
+        .stat-number { font-size: 24px; font-weight: 800; color: #1d4ed8; }
+        .stat-label { font-size: 13px; color: #64748b; }
+        .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+        .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; }
+        .card h3 { margin-top: 0; margin-bottom: 8px; }
+        .chip { display: inline-block; margin: 6px 6px 0 0; background: #dbeafe; color: #1e40af; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
+        .list { margin: 0; padding-left: 18px; line-height: 1.65; }
+        .table-wrap { margin-top: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { border-bottom: 1px solid #e5e7eb; padding: 11px 12px; text-align: left; }
+        th { background: #eff6ff; color: #0f172a; }
+        tr:last-child td { border-bottom: none; }
+        .resource-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .resource-link { display: block; text-decoration: none; color: #1e293b; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; font-weight: 600; }
+        .resource-link:hover { border-color: #1d4ed8; color: #1d4ed8; }
+        .note { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; border-radius: 10px; padding: 12px; margin-top: 12px; font-size: 14px; }
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .resource-grid { grid-template-columns: 1fr; }
+            .table-wrap { overflow-x: auto; }
+            table { min-width: 620px; }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <div class="top">
+        <div><i class="fas fa-book-open"></i> Library</div>
+        <div>
+            <a href="academics.html">Academics</a>
+            <a href="index.html">Back To Home</a>
+        </div>
+    </div>
+    <div class="wrap">
+        <section class="hero">
+            <h1>Central Library Services</h1>
+            <p>Comprehensive print and digital learning ecosystem with OPAC, e-resources, circulation support, and extended study access.</p>
+        </section>
+
+        <h2 class="section-title">Library Profile</h2>
+        <p class="muted">The library supports academic and research needs with continuously growing collections, technology-enabled services, and dedicated staff support.</p>
+        <section class="stats-grid">
+            <article class="stat-card"><div class="stat-number">12,000+</div><div class="stat-label">Titles (Approx)</div></article>
+            <article class="stat-card"><div class="stat-number">50,000+</div><div class="stat-label">Volumes (Approx)</div></article>
+            <article class="stat-card"><div class="stat-number">600+</div><div class="stat-label">E-Journals Access</div></article>
+            <article class="stat-card"><div class="stat-number">450+</div><div class="stat-label">Daily Footfall</div></article>
+        </section>
+
+        <h2 class="section-title">Core Library Services</h2>
+        <section class="grid">
+            <article class="card">
+                <h3>Digital Library</h3>
+                <p>Access e-books, journals, and research archives with institutional login.</p>
+                <span class="chip">E-Books</span><span class="chip">E-Journals</span><span class="chip">Research Databases</span>
+            </article>
+            <article class="card">
+                <h3>OPAC Search</h3>
+                <p>Check availability by title, author, subject, and accession number before visiting.</p>
+                <span class="chip">Catalog Search</span><span class="chip">Availability Check</span>
+            </article>
+            <article class="card">
+                <h3>Timings</h3>
+                <p>Monday to Saturday: 8:30 AM to 8:00 PM. Extended hours during exam periods.</p>
+            </article>
+            <article class="card">
+                <h3>Rules</h3>
+                <p>Carry ID card, maintain silence, and return books within due date.</p>
+            </article>
+        </section>
+
+        <h2 class="section-title">Circulation and Borrowing</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Category</th>
+                        <th>Books Allowed</th>
+                        <th>Other Items</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Year Students</td>
+                        <td>Up to 6 books</td>
+                        <td>2 media items</td>
+                        <td>Standard circulation policy</td>
+                    </tr>
+                    <tr>
+                        <td>Senior Students</td>
+                        <td>Additional borrowing eligibility</td>
+                        <td>Department-dependent</td>
+                        <td>Extended access for projects</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty</td>
+                        <td>Up to 8 books</td>
+                        <td>2 media items</td>
+                        <td>Supports teaching and research</td>
+                    </tr>
+                    <tr>
+                        <td>Staff</td>
+                        <td>Up to 2 books</td>
+                        <td>As per policy</td>
+                        <td>Administrative and academic use</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Facilities and Services</h2>
+        <section class="grid">
+            <article class="card">
+                <h3>Automated Library Operations</h3>
+                <ul class="list">
+                    <li>Computerized issue and return workflow</li>
+                    <li>OPAC-based title and availability transparency</li>
+                    <li>Department-level access to catalog status</li>
+                </ul>
+            </article>
+            <article class="card">
+                <h3>Academic Support</h3>
+                <ul class="list">
+                    <li>Final year project archive and references</li>
+                    <li>Reprographic support for academic material</li>
+                    <li>Book exhibitions and new arrivals showcase</li>
+                </ul>
+            </article>
+        </section>
+
+        <h2 class="section-title">Library Resource Links</h2>
+        <div class="resource-grid">
+            <a class="resource-link" href="library-hours-circulation.html">Library Hours and Circulation</a>
+            <a class="resource-link" href="library-rules-regulations.html">Library Rules and Regulations</a>
+            <a class="resource-link" href="library-id-registration.html">Registration for Library ID</a>
+            <a class="resource-link" href="library-staff.html">Library Staff and Contacts</a>
+            <a class="resource-link" href="library-facilities-services.html">Facilities and Services</a>
+            <a class="resource-link" href="library-e-resources.html">E-Resources and Recordings</a>
+            <a class="resource-link" href="library-new-arrivals.html">New Arrivals and Gallery</a>
+            <a class="resource-link" href="library-books-requisition.html">Books Requisition Form</a>
+            <a class="resource-link" href="library-registrations.html">View Library Registrations</a>
+        </div>
+
+        <div class="note"><strong>Research Integrity:</strong> Anti-plagiarism awareness and reference guidance are encouraged for all project and publication workflows.</div>
+    </div>
+</body>
+</html>

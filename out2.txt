@@ -1,0 +1,50 @@
+        async function loadAdminTimetableEntries(sectionId) {
+            const listEl = document.getElementById('timetableManagerList');
+            if (!listEl || !sectionId) return;
+
+            listEl.innerHTML = '<div class="loading"><div class="spinner"></div> Loading section timetable...</div>';
+            try {
+                const res = await fetch(`http://localhost:5000/api/timetable/section/${encodeURIComponent(sectionId)}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const data = await parseJsonSafe(res);
+                if (!res.ok || !data.success) {
+                    listEl.innerHTML = `<p style="color:#ef4444;">${(data && data.message) || 'Failed to load timetable.'}</p>`;
+                    return;
+                }
+
+                const entries = Array.isArray(data.entries) ? data.entries : [];
+                const section = data.section || {};
+                const currentEditId = String(document.getElementById('timetableEditId')?.value || '');
+                adminTimetableEntryMap = {};
+                entries.forEach((e) => {
+                    adminTimetableEntryMap[String(e.Timetable_ID)] = e;
+                });
+                if (!entries.length) {
+                    listEl.innerHTML = `<p style="color:#6b7280;">No timetable entries for Year ${section.Year || '-'} ${section.Branch || ''} ${section.Section_Name || ''}.</p>`;
+                    return;
+                }
+
+                let html = '<table class="info-table" style="width:100%;"><thead><tr><th>Day</th><th>Time</th><th>Subject</th><th>Faculty</th><th>Room</th><th>Notes</th><th>Action</th></tr></thead><tbody>';
+                entries.forEach((e) => {
+                    const isEditing = currentEditId && currentEditId === String(e.Timetable_ID);
+                    const subjectCell = `${e.Subject_Name || '-'}${isEditing ? '<span class="timetable-edit-badge">Editing</span>' : ''}`;
+                    html += `<tr class="${isEditing ? 'timetable-row-editing' : ''}">
+                        <td>${e.Day_of_Week || '-'}</td>
+                        <td>${formatTimetableRange(e.Start_Time, e.End_Time)}</td>
+                        <td>${subjectCell}</td>
+                        <td>${e.Faculty_Name || '-'}</td>
+                        <td>${e.Room_No || '-'}</td>
+                        <td>${e.Notes || '-'}</td>
+                        <td>
+                            <button class="submit-btn" style="padding:6px 10px;font-size:12px;width:auto;margin-right:6px;" onclick="beginTimetableEdit(${e.Timetable_ID}, ${sectionId})">Edit</button>
+                            <button class="delete-btn" style="padding:6px 10px;font-size:12px;" onclick="deleteTimetableEntry(${e.Timetable_ID}, ${sectionId})">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                listEl.innerHTML = html;
+            } catch (err) {
+                listEl.innerHTML = `<p style="color:#ef4444;">${err.message || 'Error loading timetable.'}</p>`;
+            }
+        }

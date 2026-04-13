@@ -1,0 +1,45 @@
+        async function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('loginError');
+
+            errorMsg.classList.remove('show');
+
+            try {
+                const response = await fetch('http://localhost:5000/api/admins/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    authToken = data.token;
+                    currentAdmin = username;
+                    localStorage.setItem('adminToken', authToken);
+                    localStorage.setItem('adminUser', username);
+
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('dashboard').classList.add('active');
+                    document.getElementById('currentAdmin').textContent = username;
+                    document.getElementById('adminRole').textContent = data.admin.role;
+
+                    loadDashboardStats();
+                    loadStudents();
+                    loadAdminWorkshops();
+                    loadResultsAnnouncementsHistory();
+                    loadFaculty();
+                    loadCredentials();
+                    loadAllCredentials();
+                    loadLibraryApprovals();
+                } else {
+                    errorMsg.textContent = data.message || 'Login failed';
+                    errorMsg.classList.add('show');
+                }
+            } catch (err) {
+                errorMsg.textContent = 'Connection error. Make sure backend is running.';
+                errorMsg.classList.add('show');
+            }
+        }

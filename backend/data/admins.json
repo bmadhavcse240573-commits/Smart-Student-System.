@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "17716145035550.3044528886542327",
+    "fullName": "System Admin",
+    "email": "admin@educonnect.com",
+    "password": "admin123",
+    "adminId": "ADMIN-001",
+    "role": "admin"
+  }
+]

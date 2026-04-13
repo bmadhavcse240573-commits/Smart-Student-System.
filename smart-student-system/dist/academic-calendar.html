@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Calendar | Innosphere Smart System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { margin: 0; font-family: Inter, Arial, sans-serif; background: #f8fafc; color: #0f172a; }
+        .top { background: #0f172a; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .top a { color: #fff; text-decoration: none; font-weight: 600; margin-left: 14px; }
+        .wrap { max-width: 1120px; margin: 30px auto; padding: 0 20px; }
+        .hero { background: linear-gradient(135deg, #0e7490, #06b6d4); color: #fff; border-radius: 14px; padding: 26px; }
+        .hero h1 { margin: 0 0 8px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+        .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; }
+        .card h3 { margin: 0 0 10px; font-size: 18px; }
+        .timeline { margin: 0; padding-left: 18px; line-height: 1.7; }
+        .table-wrap { margin-top: 18px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 14px; }
+        th { background: #f1f5f9; }
+        tr:last-child td { border-bottom: none; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .table-wrap { overflow-x: auto; } table { min-width: 680px; } }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <div class="top">
+        <div><i class="fas fa-calendar-alt"></i> Academic Calendar</div>
+        <div>
+            <a href="academics.html">Academics</a>
+            <a href="index.html">Home</a>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <section class="hero">
+            <h1>Academic Calendar 2026-27</h1>
+            <p>Semester schedule, exam windows, and key academic milestones for planning and compliance.</p>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h3>Odd Semester Timeline</h3>
+                <ul class="timeline">
+                    <li>Commencement of Classes: 15 July 2026</li>
+                    <li>Internal Assessment - I: 26 August to 30 August</li>
+                    <li>Internal Assessment - II: 07 October to 11 October</li>
+                    <li>End Semester Exams: 25 November to 12 December</li>
+                    <li>Result Publication (Tentative): 28 December 2026</li>
+                </ul>
+            </article>
+            <article class="card">
+                <h3>Even Semester Timeline</h3>
+                <ul class="timeline">
+                    <li>Commencement of Classes: 05 January 2027</li>
+                    <li>Internal Assessment - I: 17 February to 21 February</li>
+                    <li>Internal Assessment - II: 07 April to 11 April</li>
+                    <li>End Semester Exams: 20 May to 07 June</li>
+                    <li>Result Publication (Tentative): 20 June 2027</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Odd Semester</th>
+                        <th>Even Semester</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Registration and Advising</td><td>Week 1</td><td>Week 1</td><td>Departments</td></tr>
+                    <tr><td>Laboratory Evaluations</td><td>Week 7 and Week 13</td><td>Week 7 and Week 13</td><td>Course Faculty</td></tr>
+                    <tr><td>Attendance Review</td><td>Monthly</td><td>Monthly</td><td>Mentoring Cell</td></tr>
+                    <tr><td>Detention and Condonation Review</td><td>Pre-Exams</td><td>Pre-Exams</td><td>Academic Office</td></tr>
+                    <tr><td>Result Analysis Meeting</td><td>Post-Results</td><td>Post-Results</td><td>HoDs and COE</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>

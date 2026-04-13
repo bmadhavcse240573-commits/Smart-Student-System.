@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Innosphere Smart System</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 20% 20%, #2a1466 0, transparent 36%), radial-gradient(circle at 80% 70%, #10306b 0, transparent 34%), #070b1b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e5edff;
+        }
+
+        .login-container {
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 900px;
+            overflow: hidden;
+        }
+
+        .login-left {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(66, 198, 255, 0.2));
+            border-right: 1px solid rgba(255,255,255,.14);
+            color: white;
+            padding: 2rem;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, #8b5cf6, #42c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .left-subtitle {
+            opacity: 0.9;
+            margin-bottom: 1.4rem;
+            color: #c9d6ff;
+        }
+
+        .notice-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .notice-box h4 {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            color: #42c6ff;
+        }
+
+        .notice-list {
+            list-style: none;
+            display: grid;
+            gap: 0.55rem;
+            font-size: 0.92rem;
+            color: #c9d6ff;
+        }
+
+        .notice-list li {
+            line-height: 1.4;
+            border-left: 2px solid #42c6ff;
+            padding-left: 0.55rem;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .quick-link {
+            display: inline-block;
+            border: 1px solid rgba(66, 198, 255, 0.5);
+            color: #42c6ff;
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            transition: all .3s ease;
+        }
+
+        .quick-link:hover {
+            background: rgba(66, 198, 255, 0.2);
+            border-color: #42c6ff;
+        }
+
+        .login-right {
+            padding: 2rem;
+        }
+
+        .auth-top-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .auth-top-actions a {
+            text-decoration: none;
+            color: #c9d6ff;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 13px;
+        }
+
+        .auth-top-actions a:hover {
+            border-color: #42c6ff;
+            color: #42c6ff;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #e5edff;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,.2);
+            background: rgba(255,255,255,.05);
+            color: #e5edff;
+            transition: all .3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #42c6ff;
+            background: rgba(255,255,255,.08);
+            box-shadow: 0 0 12px rgba(66, 198, 255, 0.2);
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 10px;
+            top: 35px;
+            color: #42c6ff;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: linear-gradient(135deg, #8b5cf6, #42c6ff);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .error-msg, .success-msg {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .error-msg.show { color: red; display: block; }
+        .success-msg.show { color: green; display: block; }
+
+        @media (max-width: 900px) {
+            .login-container {
+                grid-template-columns: 1fr;
+                margin: 1rem;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-left">
+        <h2 class="brand-title">Innosphere Smart System</h2>
+        <p class="left-subtitle">Institution updates, exam notices, and student support in one platform.</p>
+
+        <div class="notice-box">
+            <h4><i class="fas fa-file-alt"></i> Exam Notices</h4>
+            <ul class="notice-list">
+                <li>Semester results declaration circular released for Jan 2026.</li>
+                <li>Supplementary exam registration window is open this week.</li>
+                <li>Fee payment portal enabled for current semester students.</li>
+            </ul>
+        </div>
+
+        <div class="notice-box">
+            <h4><i class="fas fa-link"></i> Quick Access</h4>
+            <div class="quick-links">
+                <a class="quick-link" href="index.html#announcement-board">Announcements</a>
+                <a class="quick-link" href="index.html#events">Events</a>
+                <a class="quick-link" href="index.html#recruiters">Placements</a>
+                <a class="quick-link" href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-right">
+
+        <div class="auth-top-actions">
+            <a href="index.html">Back to Home</a>
+            <a href="admin-dashboard.html">Admin Login</a>
+        </div>
+
+        <div id="errorMsg" class="error-msg"></div>
+        <div id="successMsg" class="success-msg"></div>
+
+        <form id="loginForm">
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+
+            <div class="form-group">
+                <label>User Type</label>
+                <div style="display:flex;gap:1rem;">
+                    <label><input type="radio" name="userType" value="student" checked> Student</label>
+                    <label><input type="radio" name="userType" value="faculty"> Faculty</label>
+                    <label><input type="radio" name="userType" value="admin"> Admin</label>
+                </div>
+            </div>
+
+            <button class="login-btn" id="loginBtn" type="submit">Login</button>
+        </form>
+
+        <br>
+        <a href="#" onclick="showForgotPasswordForm()">Forgot Password?</a>
+
+    </div>
+</div>
+
+<script>
+
+// 🔹 CHANGE THIS if using mobile or other device
+const BASE_URL = "http://localhost:5000";
+// Example: const BASE_URL = "http://10.182.10.227:5000";
+
+function parseJsonSafe(rawText) {
+    try {
+        return rawText ? JSON.parse(rawText) : {};
+    } catch (_err) {
+        const compact = (rawText || '').replace(/\s+/g, ' ').trim();
+        throw new Error((compact || 'Invalid server response').slice(0, 180));
+    }
+}
+
+const loginFormEl = document.getElementById('loginForm');
+if (loginFormEl) {
+    loginFormEl.addEventListener('submit', handleLogin);
+}
+
+async function handleLogin(e){
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const userType = document.querySelector('input[name="userType"]:checked')?.value || 'student';
+
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
+    const loginBtn = document.getElementById('loginBtn');
+
+    errorMsg.classList.remove('show');
+    successMsg.classList.remove('show');
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'Logging in...';
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, userType })
+        });
+
+        const raw = await res.text();
+        const data = parseJsonSafe(raw);
+
+        if (!res.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        if (data.success) {
+            // For dashboards compatibility (dashboard pages expect these keys)
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userType', userType);
+
+            localStorage.setItem('userToken', data.token);
+            localStorage.setItem('userData', JSON.stringify(data.user));
+            localStorage.setItem('user', JSON.stringify(data.user)); // For dashboard compatibility
+
+            successMsg.textContent = 'Login Success!';
+            successMsg.classList.add('show');
+
+            setTimeout(() => {
+                window.location.href = userType === 'student'
+                    ? 'dashboard-student.html'
+                    : (userType === 'faculty' ? 'dashboard-faculty.html' : 'admin-dashboard.html');
+            }, 1000);
+        }
+
+    } catch (err) {
+        errorMsg.textContent = err.message;
+        errorMsg.classList.add('show');
+    }
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Login';
+}
+
+// Forgot Password
+function showForgotPasswordForm(){
+    document.querySelector('.login-right').innerHTML = `
+        <form id="forgotForm">
+            <input type="email" id="forgotEmail" placeholder="Enter email" required>
+            <button type="submit">Send Reset</button>
+        </form>
+        <br>
+        <button onclick="location.reload()">Back</button>
+    `;
+
+    document.getElementById('forgotForm').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = document.getElementById('forgotEmail').value;
+
+        try {
+            const res = await fetch(`${BASE_URL}/api/auth/forgot-password`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({email})
+            });
+            const raw = await res.text();
+            const data = parseJsonSafe(raw);
+            if (!res.ok || data.success === false) {
+                throw new Error(data.message || 'Failed to send reset link');
+            }
+            alert("Reset link sent");
+        } catch (err) {
+            alert(err.message || 'Unable to send reset link');
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>

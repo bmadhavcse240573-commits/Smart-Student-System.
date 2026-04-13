@@ -1,0 +1,40 @@
+        async function loadAdminTimetableManager() {
+            const sectionSelect = document.getElementById('timetableSectionSelect');
+            const viewSelect = document.getElementById('timetableViewSectionSelect');
+            const listEl = document.getElementById('timetableManagerList');
+            if (!sectionSelect || !viewSelect || !listEl) return;
+
+            if (!document.getElementById('timetableEditId')?.value) hideTimetableEditBanner();
+
+            listEl.innerHTML = '<div class="loading"><div class="spinner"></div> Loading timetable data...</div>';
+            try {
+                const res = await fetch('http://localhost:5000/api/timetable/sections', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const data = await parseJsonSafe(res);
+                if (!res.ok || !data.success) {
+                    listEl.innerHTML = `<p style="color:#ef4444;">${(data && data.message) || 'Failed to load sections.'}</p>`;
+                    return;
+                }
+
+                const sections = Array.isArray(data.sections) ? data.sections : [];
+                if (!sections.length) {
+                    sectionSelect.innerHTML = '<option value="">No sections found</option>';
+                    viewSelect.innerHTML = '<option value="">No sections found</option>';
+                    listEl.innerHTML = '<p style="color:#6b7280;">No sections available. Create sections first.</p>';
+                    return;
+                }
+
+                const options = sections.map((s) => {
+                    const label = `Year ${s.Year} ${s.Branch} - ${s.Section_Name} (ID ${s.Section_ID})`;
+                    return `<option value="${s.Section_ID}">${label}</option>`;
+                }).join('');
+
+                sectionSelect.innerHTML = options;
+                viewSelect.innerHTML = options;
+
+                await loadAdminTimetableEntries(viewSelect.value);
+            } catch (err) {
+                listEl.innerHTML = `<p style="color:#ef4444;">${err.message || 'Error loading timetable manager.'}</p>`;
+            }
+        }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        (function () {
+            // Guard against accidental redirect loops.
+            var key = 'faculty_redirect_guard_v1';
+            var now = Date.now();
+            var prev = Number(sessionStorage.getItem(key) || 0);
+            sessionStorage.setItem(key, String(now));
+            if (!prev || (now - prev) > 3000) {
+                window.location.replace('dashboard-faculty.html');
+            }
+        })();
+    </script>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <p>Redirecting to dashboard-faculty.html...</p>
+    <p>If this page keeps refreshing, open <a href="dashboard-faculty.html">dashboard-faculty.html</a> directly.</p>
+</body>
+</html>

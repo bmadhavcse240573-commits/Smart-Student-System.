@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets — never commit real credentials
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Uploads and local data
+backend/uploads/
+**/uploads/assignment_submissions/
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.code-workspace
+
+# Build / cache (optional — remove line if you want to commit built assets)
+.cache/
+dist-temp/
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Large SQL dumps (optional — uncomment if dumps should stay local only)
+# *.sql

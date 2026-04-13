@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity & Ethical Hacking Workshop - Innosphere Smart System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .event-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #f5576c;
+        }
+
+        /* Event Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, #faf5ff 0%, #ffe8f0 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .detail-item i {
+            font-size: 1.8rem;
+            color: #f5576c;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Description */
+        .description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Agenda */
+        .agenda-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .agenda-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-left: 4px solid #f5576c;
+            border-radius: 8px;
+        }
+
+        .agenda-time {
+            min-width: 100px;
+            font-weight: 600;
+            color: #f5576c;
+        }
+
+        .agenda-content {
+            flex: 1;
+        }
+
+        .agenda-content h4 {
+            margin-bottom: 0.25rem;
+            color: #1f2937;
+        }
+
+        .agenda-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Speakers */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .speaker-card {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border: 1px solid rgba(245, 87, 108, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .speaker-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .speaker-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .speaker-title {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .register-btn {
+            background: white;
+            color: #f5576c;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .event-badges {
+                flex-direction: column;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="assets/innosphere-theme.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Smart System</div>
+            <a href="landing.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Events</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🔒 Cybersecurity & Ethical Hacking Workshop</h1>
+            <p>Master cybersecurity fundamentals and ethical hacking techniques from industry experts</p>
+            <div class="event-badges">
+                <div class="badge"><i class="fas fa-calendar"></i> February 20, 2026</div>
+                <div class="badge"><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</div>
+                <div class="badge"><i class="fas fa-map-marker-alt"></i> Campus</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Event Details -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Event Details</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="detail-label">Date</div>
+                    <div class="detail-value">Feb 20, 2026</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="detail-label">Time</div>
+                    <div class="detail-value">10:00 AM - 4:00 PM</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value">Campus</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-users"></i>
+                    <div class="detail-label">Capacity</div>
+                    <div class="detail-value">300 Participants</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-file-alt"></i> About This Workshop</h2>
+            <p class="description">
+                Dive deep into the world of cybersecurity and ethical hacking with our comprehensive workshop. Learn essential security principles, threat assessment, vulnerability testing, and penetration testing techniques. This hands-on session covers real-world scenarios and industry best practices to help you understand and defend against cyber threats.
+                <br><br>
+                Whether you're interested in building a career in cybersecurity or simply want to protect your digital assets, this workshop provides practical skills and knowledge from certified ethical hacking professionals. All participants will work with industry-standard tools and complete practical exercises.
+            </p>
+        </div>
+
+        <!-- Agenda -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-list"></i> Workshop Agenda</h2>
+            <ul class="agenda-list">
+                <li class="agenda-item">
+                    <div class="agenda-time">10:00 - 10:30 AM</div>
+                    <div class="agenda-content">
+                        <h4>Registration & Cybersecurity Introduction</h4>
+                        <p>Overview of current cyber threats and security landscape</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">10:30 AM - 12:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Network Security Fundamentals</h4>
+                        <p>TCP/IP protocols, firewalls, VPNs, and network architecture</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">12:00 - 1:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Lunch Break</h4>
+                        <p>Networking and refreshments</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">1:00 - 2:30 PM</div>
+                    <div class="agenda-content">
+                        <h4>Ethical Hacking & Penetration Testing</h4>
+                        <p>Hands-on lab with tools like Metasploit, Wireshark, and Nmap</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">2:30 - 2:45 PM</div>
+                    <div class="agenda-content">
+                        <h4>Coffee Break</h4>
+                        <p>Refreshments and networking</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">2:45 - 4:00 PM</div>
+                    <div class="agenda-content">
+                        <h4>Incident Response & Best Practices</h4>
+                        <p>Q&A, case studies, and certificate presentation</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Speakers -->
+        <div class="content-card">
+            <h2 class="section-title"><i class="fas fa-microphone"></i> Expert Speakers</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-avatar">🔐</div>
+                    <div class="speaker-name">Dr. Vikram Patel</div>
+                    <div class="speaker-title">Cybersecurity Lead</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">CEH & OSCP Certified</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar">🛡️</div>
+                    <div class="speaker-name">Captain Neha Sharma</div>
+                    <div class="speaker-title">Ethical Hacker</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">10+ years in penetration testing</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar">⚔️</div>
+                    <div class="speaker-name">Rohan Desai</div>
+                    <div class="speaker-title">Security Researcher</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #555;">Published security researcher</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="content-card">
+            <div class="cta-section">
+                <h2>Ready to Become a Cybersecurity Expert?</h2>
+                <p>Reserve your seat and join the next generation of security professionals!</p>
+                <button class="register-btn" onclick="alert('Registration feature coming soon! Please check your email for more details.')">Register Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Innosphere Smart System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

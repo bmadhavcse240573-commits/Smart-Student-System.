@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "17716140271510.5378937283969417",
+    "fullName": "Panduranga",
+    "email": "pandurangbele88@gmail.com",
+    "password": "Madhav@05",
+    "facultyId": "24261A0573",
+    "subject": "Maths",
+    "qualification": "Ph.D"
+  },
+  {
+    "_id": "17735839779350.5959503595652526",
+    "fullName": "Panduranga",
+    "email": "pandurang@gmail.com",
+    "password": "Madhav@05",
+    "facultyId": "STU-26570",
+    "subject": "Mathmatics",
+    "qualification": "Ph.D"
+  }
+]
