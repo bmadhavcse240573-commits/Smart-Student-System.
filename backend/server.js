@@ -382,6 +382,8 @@ app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/attendance', require('./routes/attendance'));
 app.use('/api/sections', require('./routes/sections'));
 app.use('/api/timetable', require('./routes/timetable'));
+app.use('/api/recommendations', require('./routes/recommendations'));
+app.use('/api/attendance-analytics', require('./routes/attendance-analytics'));
 
 // Health check
 app.get('/api/health', (req, res) => {

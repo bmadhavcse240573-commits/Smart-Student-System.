@@ -1,0 +1,110 @@
+@page {
+  size: A4;
+  margin: 1in 0.9in 1in 0.9in;
+}
+
+html, body {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 12pt;
+  line-height: 1.45;
+  color: #111;
+}
+
+body {
+  text-align: justify;
+}
+
+h1, h2, h3, h4 {
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  font-weight: 700;
+  color: #000;
+}
+
+h1 {
+  font-size: 20pt;
+  text-align: center;
+  margin-top: 0.4em;
+  margin-bottom: 0.6em;
+}
+
+h2 {
+  font-size: 14pt;
+  text-transform: uppercase;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+h3 {
+  font-size: 12.5pt;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+}
+
+h4 {
+  font-size: 12pt;
+  margin-top: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+p {
+  margin: 0 0 0.8em 0;
+}
+
+ul, ol {
+  margin-top: 0.2em;
+  margin-bottom: 0.8em;
+}
+
+li {
+  margin-bottom: 0.2em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  page-break-inside: avoid;
+  font-size: 10.5pt;
+}
+
+thead th {
+  background: #f3f3f3;
+  border: 1px solid #333;
+  padding: 6px;
+  text-align: center;
+}
+
+tbody td {
+  border: 1px solid #333;
+  padding: 6px;
+  vertical-align: top;
+}
+
+code, pre {
+  font-family: "Courier New", monospace;
+  font-size: 10pt;
+}
+
+pre {
+  border: 1px solid #bbb;
+  padding: 8px;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #444;
+  margin: 1em 0;
+}
+
+blockquote {
+  border-left: 3px solid #bbb;
+  margin: 0.6em 0;
+  padding-left: 0.8em;
+}
+
+strong {
+  font-weight: 700;
+}
