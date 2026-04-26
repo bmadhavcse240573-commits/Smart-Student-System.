@@ -1568,15 +1568,22 @@ Installation:
 the instructions given below):
 
 a. Clone the repository
-i. git clone https://github.com/AbhiramK01/RFID_Student_Wallet.git
-ii. cd RFID_Student_Wallet
+i. git init
+ii. git clone https://github.com/AbhiramK01/RFID_Student_Wallet.git
+iii. cd RFID_Student_Wallet
 
-b. Install dependencies
+b. Create and activate virtual environment (not required for the Node.js version, but
+recommended only if you are using any Python helper scripts)
+i. python -m venv venv
+ii. source venv/bin/activate  # On Windows:
+venv\Scripts\activate
+
+c. Install dependencies
 i. npm install
 ii. npm install --prefix backend
 iii. npm install --prefix smart-student-system
 
-c. Configure backend environment variables
+d. Configure backend environment variables
 i. Create a .env file inside the backend folder
 ii. Add the following values:
 DB_HOST=localhost
@@ -1586,7 +1593,7 @@ DB_NAME=engineering_college
 DB_PORT=3306
 JWT_SECRET=your_secret_key_here
 
-d. Set up the MySQL database
+e. Set up the MySQL database
 i. Start the MySQL service
 ii. Create the database if required:
 mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS engineering_college CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
