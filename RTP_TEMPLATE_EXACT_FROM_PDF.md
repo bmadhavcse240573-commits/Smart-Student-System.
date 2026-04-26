@@ -1553,7 +1553,8 @@ recommendations.extend(db.get_random_available_books())
 return unique_and_limit(recommendations, max_recommendations)
 34
 APPENDIX B
-User manual to run the application. Initially, clone the repository from
+User manual to run the application for the project titled "Smart Student Performance and Skill Recommendation".
+Prepared by Madhav. Initially, clone the repository from
 https://github.com/AbhiramK01/RFID_Student_Wallet on GitHub onto your local system.
 
 Installation:
