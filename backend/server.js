@@ -14,6 +14,59 @@ const io = new Server(server, {
     origin: '*'
   }
 });
+const frontendDistRoot = path.join(__dirname, '../smart-student-system/dist');
+const frontendTextExtensions = new Set(['.html', '.js', '.css', '.json', '.map']);
+
+function resolveFrontendFile(requestPath) {
+  const normalizedPath = requestPath === '/' ? '/index.html' : requestPath;
+  const candidates = [];
+
+  if (path.extname(normalizedPath)) {
+    candidates.push(normalizedPath);
+  } else {
+    candidates.push(`${normalizedPath}.html`);
+    candidates.push(path.posix.join(normalizedPath, 'index.html'));
+  }
+
+  for (const candidate of candidates) {
+    const absolutePath = path.join(frontendDistRoot, candidate);
+    if (absolutePath.startsWith(frontendDistRoot) && fs.existsSync(absolutePath) && fs.statSync(absolutePath).isFile()) {
+      return absolutePath;
+    }
+  }
+
+  return null;
+}
+
+function serveFrontendAsset(req, res, next) {
+  if (req.path.startsWith('/api/') || req.path.startsWith('/uploads/') || req.path.startsWith('/socket.io/')) {
+    return next();
+  }
+
+  const filePath = resolveFrontendFile(req.path);
+  if (!filePath) {
+    return next();
+  }
+
+  const ext = path.extname(filePath).toLowerCase();
+  if (!frontendTextExtensions.has(ext)) {
+    return res.sendFile(filePath);
+  }
+
+  let content = fs.readFileSync(filePath, 'utf8');
+  content = content.replace(/https?:\/\/localhost:5000/gi, '');
+
+  const contentTypeMap = {
+    '.html': 'text/html; charset=utf-8',
+    '.js': 'application/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
+    '.map': 'application/json; charset=utf-8'
+  };
+
+  res.setHeader('Content-Type', contentTypeMap[ext] || 'text/plain; charset=utf-8');
+  return res.send(content);
+}
 
 const PEER_ROOM_CATALOG = [
   { id: 'dsa-problem-solving', name: 'DSA Problem Solving' },
@@ -389,6 +442,8 @@ app.use('/api/attendance-analytics', require('./routes/attendance-analytics'));
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running', timestamp: new Date() });
 });
+
+app.use(serveFrontendAsset);
 
 // Auto escalation every 30 minutes for stale pending doubts (24h threshold).
 setInterval(async () => {

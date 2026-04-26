@@ -3,7 +3,7 @@
   "private": true,
   "description": "Run backend (API) + smart-student-system (frontend) together",
   "scripts": {
-    "start": "npm run dev",
+    "start": "node scripts/start.js",
     "backend": "npm --prefix backend start",
     "frontend": "npm --prefix smart-student-system run start",
     "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run backend\" \"npm run frontend\"",
